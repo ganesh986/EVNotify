@@ -85,6 +85,7 @@ export default {
             AMPERA_E: 60,
             BOLT_EV: 60,
             ID_3: 58,
+            E_GOLF: 36,
             IONIQ_BEV: 28,
             IONIQ_HEV: 1.6,
             IONIQ_PHEV: 8.9,

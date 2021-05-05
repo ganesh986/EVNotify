@@ -174,6 +174,7 @@
         <ZOEQ210 ref="ZOE_Q210"></ZOEQ210>
         <NIROEV ref="NIRO_EV"></NIROEV>
         <ID3 ref="ID_3"></ID3>
+        <EGOLF ref="E_GOLF"></EGOLF>
         <snackbar ref="snackbar"></snackbar>
         <bottom-bar class="v-step-3"></bottom-bar>
     </div>
@@ -200,6 +201,7 @@
     import ZOEQ210 from './../cars/ZOE_Q210.vue';
     import NIROEV from './../cars/NIRO_EV.vue';
     import ID3 from './../cars/ID_3.vue';
+    import EGOLF from './../cars/E_GOLF.vue';
 
     export default {
         data() {
@@ -224,7 +226,7 @@
                 lastResponse: 0,
                 obd2ErrorCount: 0,
                 consumption: 0,
-                supportedCars: ['IONIQ_BEV', 'IONIQ_HEV', 'IONIQ_PHEV', 'IONIQ_FL_EV', 'SOUL_EV', 'E_SOUL', 'AMPERA_E', 'BOLT_EV', 'KONA_EV', 'ZOE_Q210', 'NIRO_EV', 'ID_3'],
+                supportedCars: ['IONIQ_BEV', 'IONIQ_HEV', 'IONIQ_PHEV', 'IONIQ_FL_EV', 'SOUL_EV', 'E_SOUL', 'AMPERA_E', 'BOLT_EV', 'KONA_EV', 'ZOE_Q210', 'NIRO_EV', 'ID_3', 'E_GOLF'],
                 initialized: false,
                 translated: {},
                 isWaitingForEnable: false,
@@ -740,6 +742,10 @@
                 self.obd2ErrorCount = 0;
                 // calculate battery power for ID3 (special handling since it's coming partially)
                 if (self.car === 'ID_3' && self.obd2Data.DC_BATTERY_CURRENT && self.obd2Data.DC_BATTERY_VOLTAGE) {
+                    Vue.set(self.obd2Data, 'DC_BATTERY_POWER', self.obd2Data.DC_BATTERY_CURRENT * self.obd2Data.DC_BATTERY_VOLTAGE / 1000);
+                }
+                // calculate battery power for EGOLF (special handling since it's coming partially)
+                if (self.car === 'E_GOLF' && self.obd2Data.DC_BATTERY_CURRENT && self.obd2Data.DC_BATTERY_VOLTAGE) {
                     Vue.set(self.obd2Data, 'DC_BATTERY_POWER', self.obd2Data.DC_BATTERY_CURRENT * self.obd2Data.DC_BATTERY_VOLTAGE / 1000);
                 }
                 // set current timestamp and update last car response activity
